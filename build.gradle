@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'junit:junit:4.12'
+
+    // Dependencies go here
+
+    testCompile 'org.junit.jupiter:junit-jupiter:5.6.2'
+    implementation 'org.apache.commons:commons-lang3:3.6'
+    compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
+    testCompile "org.mockito:mockito-core:3.+"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+mainClassName = 'com.newrelic.codingchallenge.Main'
+
+shadowJar {
+    baseName = 'coding-challenge-shadow'
+    classifier = null
+    version = null
+    manifest {
+        attributes 'Description': 'New Relic coding challenge application JAR'
+    }
+}
+
+
